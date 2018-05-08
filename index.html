@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #slider{
+        margin: 200px auto;
+        position: relative;
+        border:1px solid red;
+        /* overflow: hidden; */
+        width: 200px;
+        height: 100px;
+    }
+    #slider > ul{
+        width: 1000px;
+        height: 100px;
+        margin-left:-200px;
+        position: absolute;
+        -webkit-padding-start: 0px;
+        -webkit-margin-before: 0px;
+        -webkit-margin-after: 0px;
+    }
+    #slider > ul > li{
+        width: 200px;
+        height: 100px;
+        text-align: center;
+        line-height: 100px;
+        border: 1px solid #eee;
+        list-style: none;
+        font-size: 25px;
+
+        float:left;
+    }
+    #slider > #prev{
+        position: absolute;
+        left:0;
+        top:50%;
+    }
+    #slider > #next{
+        position: absolute;
+        right:0;
+        top:50%;
+    }
+</style>
+<body>
+    <div id="slider">
+        <ul>
+            <li>SLIDE 1</li>
+            <li>SLIDE 2</li>
+            <li>SLIDE 3</li>
+            <li>SLIDE 4</li>
+        </ul>
+        <button id="prev">PREV</button>
+        <button id="next">NEXT</button>
+    </div>
+    <script>
+
+        /*1.초기화 : 맨 뒤의 슬라이드를 첫번째 슬라이드 앞으로 이동*/
+        var slider_list = document.querySelector('#slider > ul');
+        var last_slide = document.querySelector('#slider > ul > li:last-child');
+        slider_list.insertBefore(last_slide, slider_list.firstChild);
+
+
+        /* 버튼 정의 */
+        const prev = document.getElementById('prev');
+        const next = document.getElementById('next');
+
+        /*버튼 클릭시 슬라이드 옆으로 이동 */
+        prev.addEventListener('click',function(){
+            var currentLeft = slider_list.style.left;
+            currentLeft = currentLeft.replace('px', '') -200;
+            slider_list.style.left = currentLeft +'px';
+
+            /*슬라이드 이동*/
+            var count = 1;
+            const max = 200;
+            var slideMove = setInterval(function(){
+                console.log('text');
+                count ++;
+                if(count == max){
+                    clearInterval(slideMove);
+                }
+            })
+
+
+
+            /*첫번째 슬라이드를 맨 뒤에 붙임*/
+            var first_slide = document.querySelector('#slider > ul > li:first-child');
+            slider_list.appendChild(first_slide);
+            slider_list.style.left = '';
+        });
+
+        /*반응형 웹*/
+
+        
+        
+    </script>
+</body>
+</html>
