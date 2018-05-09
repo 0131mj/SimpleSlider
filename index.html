@@ -79,18 +79,24 @@
             var count = 1;
             const max = 200;
             var slideMove = setInterval(function(){
-                console.log('text');
+                
+                //console.log('text');
                 count ++;
+                slider_list.style.left = count +'px';
                 if(count == max){
                     clearInterval(slideMove);
                 }
             })
 
+            /* todo 클릭시 클리어 인터벌 처리 */
+
 
 
             /*첫번째 슬라이드를 맨 뒤에 붙임*/
-            var first_slide = document.querySelector('#slider > ul > li:first-child');
-            slider_list.appendChild(first_slide);
+            // var first_slide = document.querySelector('#slider > ul > li:first-child');
+            // slider_list.appendChild(first_slide);
+            var last_slide = document.querySelector('#slider > ul > li:last-child');
+            slider_list.insertBefore(last_slide, slider_list.firstChild);
             slider_list.style.left = '';
         });
 
