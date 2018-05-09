@@ -8,7 +8,8 @@
 </head>
 <style>
     #slider{
-        margin: 200px auto;
+        margin-top: 200px;
+        margin-left: 200px;
         position: relative;
         border:1px solid red;
         /* overflow: hidden; */
@@ -23,6 +24,7 @@
         -webkit-padding-start: 0px;
         -webkit-margin-before: 0px;
         -webkit-margin-after: 0px;
+        left:200px;
     }
     #slider > ul > li{
         width: 200px;
@@ -32,7 +34,6 @@
         border: 1px solid #eee;
         list-style: none;
         font-size: 25px;
-
         float:left;
     }
     #slider > #prev{
@@ -59,28 +60,27 @@
     </div>
     <script>
 
-        /*1.초기화 : 맨 뒤의 슬라이드를 첫번째 슬라이드 앞으로 이동*/
+        /*1.엘리먼트 정의 */
         var slider_list = document.querySelector('#slider > ul');
         var last_slide = document.querySelector('#slider > ul > li:last-child');
-        slider_list.insertBefore(last_slide, slider_list.firstChild);
-
-
-        /* 버튼 정의 */
         const prev = document.getElementById('prev');
         const next = document.getElementById('next');
 
-        /*버튼 클릭시 슬라이드 옆으로 이동 */
+        /*버튼 클릭시 슬라이드 이동 */
         prev.addEventListener('click',function(){
             var currentLeft = slider_list.style.left;
             currentLeft = currentLeft.replace('px', '') -200;
             slider_list.style.left = currentLeft +'px';
 
-            /*슬라이드 이동*/
+            /* 1) 마지막 슬라이드를 맨 앞에 붙임*/
+            var last_slide = document.querySelector('#slider > ul > li:last-child');
+            slider_list.insertBefore(last_slide, slider_list.firstChild);
+            slider_list.style.left = '';
+
+            /* 2) 슬라이드 이동*/
             var count = 1;
             const max = 200;
             var slideMove = setInterval(function(){
-                
-                //console.log('text');
                 count ++;
                 slider_list.style.left = count +'px';
                 if(count == max){
@@ -88,19 +88,14 @@
                 }
             })
 
-            /* todo 클릭시 클리어 인터벌 처리 */
-
-
-
-            /*첫번째 슬라이드를 맨 뒤에 붙임*/
-            // var first_slide = document.querySelector('#slider > ul > li:first-child');
-            // slider_list.appendChild(first_slide);
-            var last_slide = document.querySelector('#slider > ul > li:last-child');
-            slider_list.insertBefore(last_slide, slider_list.firstChild);
-            slider_list.style.left = '';
+            
         });
 
-        /*반응형 웹*/
+        /*
+            todo 
+            클릭시 클리어 인터벌 처리
+            반응형 웹
+        */
 
         
         
